@@ -1,0 +1,23 @@
+#!/bin/sh
+# Maven Wrapper startup script
+
+# Locate Java
+if [ -n "$JAVA_HOME" ]; then
+    JAVA="$JAVA_HOME/bin/java"
+else
+    JAVA="java"
+fi
+
+# Directory of this script
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+cd "$DIR"
+
+MAVEN_OPTS="${MAVEN_OPTS} -Xmx1024m"
+
+exec "$JAVA" \
+    -classpath ".mvn/wrapper/maven-wrapper.jar" \
+    -Dmaven.multiModuleProjectDirectory="$DIR" \
+    -Dhttps.protocols=TLSv1.2 \
+    ${MAVEN_OPTS} \
+    org.apache.maven.wrapper.MavenWrapperMain \
+    "$@"

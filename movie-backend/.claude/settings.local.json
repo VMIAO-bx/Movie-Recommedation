@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -fsL -o .mvn/wrapper/maven-wrapper.jar \"https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar\")",
+      "Bash(java -jar .mvn/wrapper/maven-wrapper.jar)",
+      "Bash(curl -sL \"http://mirrors.aliyun.com/apache/maven/maven-3/3.9.6/binaries/\")",
+      "Bash(echo \"EXIT: $?\")"
+    ]
+  }
+}

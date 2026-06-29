@@ -1,0 +1,38 @@
+server:
+  # Railway injects PORT env var; defaults to 8080 locally
+  port: ${PORT:8080}
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Use env vars in production; defaults work for local dev
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/movie_recommendation?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:xz911005}
+
+mybatis-plus:
+  # mapper XML file location (not needed if using annotations only)
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # entity package for type aliases
+  type-aliases-package: com.moviebackend.entity
+  configuration:
+    # camel case to underscore conversion
+    map-underscore-to-camel-case: true
+    # SQL logging (set to true for debugging)
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # table prefix (leave empty since no prefix)
+      id-type: auto
+      # logical delete config (optional)
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT configuration
+jwt:
+  secret: ${JWT_SECRET:MovieRecommendationSystemSecretKey2024ForJwtTokenGeneration}
+  expiration: ${JWT_EXPIRATION:604800000}  # 7 days in milliseconds
