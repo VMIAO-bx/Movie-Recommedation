@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(iwr https://fly.io/install.ps1 -UseBasicParsing | iex)"
+    ]
+  }
+}

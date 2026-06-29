@@ -1,0 +1,30 @@
+# Render Blueprint 配置
+# 在 Render Dashboard → Blueprint 连接仓库即可一键部署
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── 后端服务 ──
+  - type: web
+    name: movie-backend
+    runtime: docker
+    repo: https://github.com/VMIAO-bx/Movie-Recommedation
+    rootDir: movie-backend
+    plan: free
+    region: singapore
+    healthCheckPath: /
+    envVars:
+      # 端口
+      - key: PORT
+        value: "8080"
+      # 数据库（部署后在 Render 面板改成真实的 Aiven MySQL 信息）
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://localhost:3306/movie_recommendation?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: root
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: change_me
+      # JWT
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: "604800000"
