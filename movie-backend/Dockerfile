@@ -23,7 +23,7 @@ WORKDIR /app
 # Copy JAR from build stage
 COPY --from=build /build/target/movie-backend-1.0.0.jar app.jar
 
-# Railway injects PORT env var; default 8080 for local
+# Fly.io injects PORT env var; default 8080 for local
 EXPOSE 8080
 
 # Start the app — JVM reads server.port from $PORT

@@ -1,0 +1,28 @@
+# Fly.io 部署配置
+# Docs: https://fly.io/docs/reference/configuration/
+
+app = "movie-backend"  # 部署时会自动替换为你的应用名
+
+[build]
+  dockerfile = "Dockerfile"
+
+[[services]]
+  protocol = "tcp"
+  # Fly.io 会自动分配外部端口 80/443，内部转发到 8080
+  internal_port = 8080
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  # 健康检查：Spring Boot admin 路径
+  [[services.http_checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"
+    method = "get"
+    path = "/"
